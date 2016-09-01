@@ -59,7 +59,7 @@ public class BagofWordsClassifierExample {
     public Integer weightDoc (ArrayList<String> dataSet) {
         Integer weightedScore = 0;
         for (String word : dataSet) {
-            weightedScore = setWeight(word);
+            weightedScore += setWeight(word);
         }
         return weightedScore;
     }
