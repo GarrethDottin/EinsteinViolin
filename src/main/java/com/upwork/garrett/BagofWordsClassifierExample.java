@@ -47,9 +47,15 @@ public class BagofWordsClassifierExample {
         tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
 
-        BagOfWordsVectorizer bagOfWordsVectorizer = new BagOfWordsVectorizer.Builder().setIterator(iterator).setTokenizerFactory(tokenizerFactory).setStopWords(Arrays.asList(stopWords)).setMinWordFrequency(1).setVocab(vocabCache).build();
+        BagOfWordsVectorizer bagOfWordsVectorizer = new BagOfWordsVectorizer.Builder().setIterator(iterator).
+                setTokenizerFactory(tokenizerFactory).
+                setStopWords(Arrays.asList(stopWords)).
+
+                setMinWordFrequency(1).build();
         InputStream einsteinStrem = resource.getInputStream(); //Thread.currentThread().getContextClassLoader().getResourceAsStream("labeled/muisc/Albert_Einstein.txt");
         String s = IOUtils.toString(einsteinStrem);
+
+        bagOfWordsVectorizer.fit();
 
         DataSet dataSet = bagOfWordsVectorizer.vectorize(s,"Music");
 
