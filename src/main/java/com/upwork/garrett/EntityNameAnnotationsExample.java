@@ -31,8 +31,8 @@ public class EntityNameAnnotationsExample {
 
         Properties props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma,ner,regexner  ,parse, dcoref");
-        props.put("regexner.mapping","music_map.tsv");
-        props.put("regexner.ignoreCase","true");
+        props.put("regexner.mapping", "music_map.tsv");
+        props.put("regexner.ignoreCase", "true");
 
         StanfordCoreNLP pipeLine = new StanfordCoreNLP(props);
 
