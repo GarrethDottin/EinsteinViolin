@@ -27,103 +27,81 @@ import java.util.Properties;
  */
 public class EntityNameAnnotationsExample {
 
-    public static void main(String[] args) throws IOException {
+    /*
+    * TODO: Refactor from Private Static Methods to Private methods with an instantiated obj
+    * TODO: Check if Governor mathces something in the dictionary if doesnt match break
+    * TODO: If does match check against the music dictionary
+    * TODO: Setup a basic weighting model
+    *
+    *
+    * */
+    private static Properties createProps() {
 
         Properties props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma,ner,regexner  ,parse, dcoref");
         props.put("regexner.mapping","music_map.tsv");
         props.put("regexner.ignoreCase","true");
 
-        StanfordCoreNLP pipeLine = new StanfordCoreNLP(props);
+        return props;
+    }
 
-
+    private static Annotation prepDoc(String inputText) throws IOException{
         // Next we generate an annotation object that we will use to annotate the text with
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = formatter.format(System.currentTimeMillis());
-        // inputText will be the text to evaluate in this example
         URL url = Thread.currentThread().getContextClassLoader().getResource("Albert_Einstein.txt");
         File file = FileUtils.toFile(url);
         String text1 = FileUtils.readFileToString(file);
+
         //System.out.println("text1 = " + text1);
         //String sampleTxt = "He sat down at his piano and started playing. He continued playing and writing notes for half an hour.At the end of the two weeks, he came downstairs with two sheets of paper bearing his theory.He could also play the esraj, a musical instrument similar to a violin";
-        String sampleTxt = "Partial invoice (€100,000, so roughly 40%) for the consignment C27655 we shipped on 15th August to London from the Make Believe Town depot.Customer contact (Sigourney) says they will pay this on the usual credit terms (30 days) And Play Piano and Violin";
-        Annotation document = new Annotation(sampleTxt);
+        Annotation document = new Annotation(inputText);
         document.set(CoreAnnotations.DocDateAnnotation.class, currentTime);
-        // Finally we use the pipeline to annotate the document we created
+
+        return document;
+    }
+    private static void getSementicGraphEdge (List<SemanticGraphEdge> outEdgesSorted) {
+        for (SemanticGraphEdge edge : outEdgesSorted) {
+            IndexedWord dep = edge.getDependent();
+            System.out.println("Dependent=" + dep);
+            IndexedWord gov = edge.getGovernor();
+            System.out.println("Governor=" + gov);
+            GrammaticalRelation relation = edge.getRelation();
+            System.out.println("Relation=" + relation);
+
+            // check the governor against
+        }
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        Properties props = createProps();
+        StanfordCoreNLP pipeLine = new StanfordCoreNLP(props);
+        String sampleTxt = "Partial invoice (€100,000, so roughly 40%) for the consignment C27655 we shipped on 15th August to London from the Make Believe Town depot.Customer contact (Sigourney) says they will pay this on the usual credit terms (30 days) And Play Piano and Violin";
+        Annotation document = prepDoc(sampleTxt);
         pipeLine.annotate(document);
 
         /* now that we have the document (wrapping our inputText) annotated we can extract the
-    annotated sentences from it, Annotated sentences are represent by a CoreMap Object */
+        annotated sentences from it, Annotated sentences are represent by a CoreMap Object */
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
 
-/* Next we can go over the annotated sentences and extract the annotated words,
-    Using the CoreLabel Object */
+        /* Next we can go over the annotated sentences and extract the annotated words,
+        Using the CoreLabel Object */
         for (CoreMap sentence : sentences) {
-            for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
-                // Using the CoreLabel object we can start retrieving NLP annotation data
-                // Extracting the Text Entity
-                String text = token.getString(CoreAnnotations.TextAnnotation.class);
-
-                // Extracting Name Entity Recognition
-                String ner = token.getString(CoreAnnotations.NamedEntityTagAnnotation.class);
-
-
-                // Extracting Part Of Speech
-                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-
-                // Extracting the Lemma
-                String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
-                System.out.println("text=" + text + ";NER=" + ner +
-                        ";POS=" + pos + ";LEMMA=" + lemma);
-
-        /* There are more annotation that are available for extracting
-            (depending on which "annotators" you initiated with the pipeline properties",
-            examine the token, sentence and document objects to find any relevant annotation
-            you might need */
-            }
-
-/*
-            List<CoreMap> coreMaps = sentence.get(CoreAnnotations.MentionsAnnotation.class);
-            for (CoreMap coreMap : coreMaps) {
-                coreMap.get()
-            }
-*/
-
-
-    /* Next we will extract the SemanitcGraph to examine the connection
-       between the words in our evaluated sentence */
+             /* Next we will extract the SemanitcGraph to examine the connection between the words in our evaluated sentence */
             SemanticGraph dependencies = sentence.get
-                    (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
+                        (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
 
-    /* The IndexedWord object is very similar to the CoreLabel object
-        only is used in the SemanticGraph context */
+            /* The IndexedWord object is very similar to the CoreLabel object only is used in the SemanticGraph context */
             IndexedWord firstRoot = dependencies.getFirstRoot();
             List<SemanticGraphEdge> incomingEdgesSorted =
-                    dependencies.getIncomingEdgesSorted(firstRoot);
+                        dependencies.getIncomingEdgesSorted(firstRoot);
 
-            for (SemanticGraphEdge edge : incomingEdgesSorted) {
-                // Getting the target node with attached edges
-                IndexedWord dep = edge.getDependent();
-
-                // Getting the source node with attached edges
-                IndexedWord gov = edge.getGovernor();
-
-                // Get the relation name between them
-                GrammaticalRelation relation = edge.getRelation();
-            }
-
-            // this section is same as above just we retrieve the OutEdges
+                // this section is same as above just we retrieve the OutEdges
             List<SemanticGraphEdge> outEdgesSorted = dependencies.getOutEdgesSorted(firstRoot);
-            for (SemanticGraphEdge edge : outEdgesSorted) {
-                IndexedWord dep = edge.getDependent();
-                System.out.println("Dependent=" + dep);
-                IndexedWord gov = edge.getGovernor();
-                System.out.println("Governor=" + gov);
-                GrammaticalRelation relation = edge.getRelation();
-                System.out.println("Relation=" + relation);
-            }
-        }
+            getSementicGraphEdge(outEdgesSorted);
 
+        }
 
     }
 }
