@@ -30,16 +30,7 @@ import java.util.Properties;
  */
 public class EntityNameAnnotationsExample {
 
-    /*
-    * TODO: Refactor from Private Static Methods to Private methods with an instantiated obj
-    * TODO: Check if Governor matches something in the dictionary if doesnt match break
-    * TODO: If does match check against the music dictionary
-    * TODO: Setup a basic weighting model
-    *
-    *
-    * */
-    private static Properties createProps() {
-
+    private Properties createProps() {
         Properties props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma,ner,regexner  ,parse, dcoref");
         props.put("regexner.mapping","music_map.tsv");
@@ -73,43 +64,34 @@ public class EntityNameAnnotationsExample {
         }
     }
 
+    private void dissectSentence(List<SemanticGraphEdge> outEdgesSorted) {
+        for (SemanticGraphEdge edge : outEdgesSorted) {
+            IndexedWord dep = edge.getDependent();
+            IndexedWord gov = edge.getGovernor();
+            GrammaticalRelation relation = edge.getRelation();
+            System.out.println("End of sentence***********");
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         EntityNameAnnotationsExample EVTest = new EntityNameAnnotationsExample();
+
         Properties props = EVTest.createProps();
         StanfordCoreNLP pipeLine = new StanfordCoreNLP(props);
-        String sampleTxt = "Partial invoice (€100,000, so roughly 40%) for the consignment C27655 we shipped on 15th August to London from the Make Believe Town depot.Customer contact (Sigourney) says they will pay this on the usual credit terms (30 days) And Play Piano and Violin";
-        Annotation document = EVTest.prepDoc(sampleTxt);
+        Annotation document = EVTest.prepDoc("Albert_Einstein.txt");
         pipeLine.annotate(document);
 
-        /* now that we have the document (wrapping our inputText) annotated we can extract the
-        annotated sentences from it, Annotated sentences are represent by a CoreMap Object */
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
 
-
-
-        /* Next we can go over the annotated sentences and extract the annotated words,
-        Using the CoreLabel Object */
         for (CoreMap sentence : sentences) {
-            for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
-                // this is the NER label of the token
-                String ne = token.get(NamedEntityTagAnnotation.class);
-
-            }
-             /* Next we will extract the SemanitcGraph to examine the connection between the words in our evaluated sentence */
+            /* Next we will extract the SemanticGraph to examine the connection
+            between the words in our evaluated sentence */
             SemanticGraph dependencies = sentence.get
-                        (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
-
-            /* The IndexedWord object is very similar to the CoreLabel object only is used in the SemanticGraph context */
+                    (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
             IndexedWord firstRoot = dependencies.getFirstRoot();
-            List<SemanticGraphEdge> incomingEdgesSorted =
-                        dependencies.getIncomingEdgesSorted(firstRoot);
-
-                // this section is same as above just we retrieve the OutEdges
+            // this section is same as above just we retrieve the OutEdges
             List<SemanticGraphEdge> outEdgesSorted = dependencies.getOutEdgesSorted(firstRoot);
-            EVTest.getSemanticGraphEdge(outEdgesSorted);
-
+            EVTest.dissectSentence(outEdgesSorted);
         }
-
     }
 }
