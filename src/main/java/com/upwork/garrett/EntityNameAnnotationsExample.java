@@ -54,6 +54,7 @@ public class EntityNameAnnotationsExample {
     }
     private  void getSemanticGraphEdge (List<SemanticGraphEdge> outEdgesSorted) {
         for (SemanticGraphEdge edge : outEdgesSorted) {
+            System.out.println("edge " + edge);
             IndexedWord dep = edge.getDependent();
             System.out.println("Dependent=" + dep);
             IndexedWord gov = edge.getGovernor();
@@ -89,9 +90,11 @@ public class EntityNameAnnotationsExample {
             SemanticGraph dependencies = sentence.get
                     (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
             IndexedWord firstRoot = dependencies.getFirstRoot();
+
             // this section is same as above just we retrieve the OutEdges
             List<SemanticGraphEdge> outEdgesSorted = dependencies.getOutEdgesSorted(firstRoot);
-            EVTest.dissectSentence(outEdgesSorted);
+//            EVTest.dissectSentence(outEdgesSorted);
+            EVTest.getSemanticGraphEdge(outEdgesSorted);
         }
     }
 }
