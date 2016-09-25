@@ -37,9 +37,12 @@ public class EntityNameAnnotationsExample {
     }
 
     private void dissectSentence(List<SemanticGraphEdge> outEdgesSorted) {
+
+        // check the props for the words
         for (SemanticGraphEdge edge : outEdgesSorted) {
             IndexedWord dep = edge.getDependent();
             IndexedWord gov = edge.getGovernor();
+
             GrammaticalRelation relation = edge.getRelation();
             System.out.println("End of sentence***********");
         }
