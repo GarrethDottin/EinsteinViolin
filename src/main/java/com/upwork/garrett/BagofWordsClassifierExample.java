@@ -6,7 +6,6 @@ import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
 import org.deeplearning4j.text.documentiterator.LabelAwareIterator;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
