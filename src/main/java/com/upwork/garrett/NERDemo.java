@@ -40,7 +40,7 @@ public class NERDemo {
     public static void main(String[] args) throws Exception {
 
         // Create model using props file
-        String serializedClassifier = "src/main/classifiers/english.all.3class.distsim.crf.ser.gz";
+        String serializedClassifier = "src/main/classifiers/music-pos-tagger-model.ser.gz";
 
         if (args.length > 0) {
             serializedClassifier = args[0];
@@ -78,7 +78,7 @@ public class NERDemo {
                         String musicCheck = unfinishedString.substring(0, unfinishedString.length()-1);
                         System.out.println(musicCheck);
 
-                        if (musicCheck == "MUSIC") {
+                        if (musicCheck == "music") {
                             // Add Text to doc
                         }
 
