@@ -4,7 +4,7 @@ arch = words(-1,1),unicodeshapes(-1,1),order(2),suffix(4)
 wordFunction =
 trainFile = /Users/garrethdottin/Desktop/EinsteinViolin/src/main/resources/music_map.tsv
 map = word=0,answer=1
-serializeTo = ner-model.ser.gz
+serializeTo = music-pos-tagger-model.ser.gz
 saveFeatureIndexToDisk = true
 useClassFeature=true
 useWord=true

@@ -1,5 +1,5 @@
-## tagger training invoked at Mon Sep 26 13:03:27 EDT 2016 with arguments:
-                   model = music-pos-tagger-model
+## tagger training invoked at Mon Sep 26 15:09:29 EDT 2016 with arguments:
+                   model = music-pos-tagger-model.ser.gz
                     arch = words(-1,1),unicodeshapes(-1,1),order(2),suffix(4)
             wordFunction = 
                trainFile = /Users/garrethdottin/Desktop/EinsteinViolin/src/main/resources/music_map.tsv
