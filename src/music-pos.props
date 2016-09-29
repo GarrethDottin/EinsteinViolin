@@ -2,7 +2,7 @@
 model = music-pos-tagger-model
 arch = words(-1,1),unicodeshapes(-1,1),order(2),suffix(4)
 wordFunction =
-trainFile = format=TSV,wordColumn=1,tagColumn=2, music_map.tsv
+trainFile =  /Users/garrethdottin/Desktop/tf-idf-vectorizer/src/main/resources/music_map.tsv
 closedClassTags =
 closedClassTagThreshold = 40
 curWordMinFeatureThresh = 2
@@ -29,7 +29,5 @@ verbose = true
 verboseResults = true
 veryCommonWordThresh = 250
 xmlInput = null
-outputFile =
-outputFormat = slashTags
 outputFormatOptions =
 nthreads = 1

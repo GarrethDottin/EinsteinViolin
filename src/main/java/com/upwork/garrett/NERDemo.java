@@ -12,6 +12,8 @@ import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
 /** This is a demo of calling CRFClassifier programmatically.
  *  <p>
  *  Usage: {@code java -mx400m -cp "*" NERDemo [serializedClassifier [fileName]] }
@@ -43,53 +45,39 @@ public class NERDemo {
 
         // Create model using props file
         String serializedClassifier = "src/main/classifiers/english.all.3class.distsim.crf.ser.gz";
-        ArrayList<String> possibleMusicians = new ArrayList<String>();
         if (args.length > 0) {
             serializedClassifier = args[0];
         }
 
-        //
-
         AbstractSequenceClassifier<CoreLabel> classifier = CRFClassifier.getClassifier(serializedClassifier);
 
-    /* For either a file to annotate or for the hardcoded text example, this
-       demo file shows several ways to process the input, for teaching purposes.
-    */
+        HashMap<String, String[]> sampleText = new HashMap<>();
+        String[] example = {"Good afternoon Rajat Raina, how are you today?",
+                "I go to school at Stanford University, which is located in California." };
+        sampleText.put("Einstein", example);
+        HashMap<String, String> possibleMusicians = new HashMap<>();
 
-      /* For the hard-coded String, it shows how to run it on a single
-         sentence, and how to do this and produce several formats, including
-         slash tags and an inline XML output format. It also shows the full
-         contents of the {@code CoreLabel}s that are constructed by the
-         classifier. And it shows getting out the probabilities of different
-         assignments and an n-best list of classifications with probabilities.
-      */
-            HashMap<String, String[]> sampleText = new HashMap<>();
-            String[] example = {"Good afternoon Rajat Raina, how are you today?",
-                    "I go to school at Stanford University, which is located in California." };
-            sampleText.put("Einstein", example);
+        String Scientist = sampleText.keySet().stream().findFirst().toString();
 
-            String Scientist = sampleText.keySet().stream().findFirst().toString();
 
-            for (String str : sampleText.get(Scientist)) {
-                for (List<CoreLabel> lcl : classifier.classify(str)) {
-                    for (CoreLabel cl : lcl) {
-                        // Check if the value matches Music
-                        //
+        for (String str : example) {
+            for (List<CoreLabel> lcl : classifier.classify(str)) {
+                for (CoreLabel cl : lcl) {
+                    String tempString = cl.toShorterString();
+                    String unfinishedString = tempString.substring(tempString.indexOf(" Answer=") + 8);
+                    String musicCheck = unfinishedString.substring(0, unfinishedString.length()-1);
+                    System.out.println(musicCheck);
 
-                        String entityDetails = cl.toShortString();
-                        String entityType = entityDetails.replace("^[^_]*Answer=","");
-
-                        if ("Cool".equals("Music")) {
-                            possibleMusicians.add(Scientist);
-                            break;
-                        }
-                        // if it does break make a note about that document
-                        System.out.println(cl.toShorterString());
+                    if (musicCheck == "MUSIC") {
+                        possibleMusicians.put(Scientist, str);
+                        break;
                     }
+
                 }
             }
+        }
 
-            System.out.println("---");
+        System.out.println("---");
 
     }
 
