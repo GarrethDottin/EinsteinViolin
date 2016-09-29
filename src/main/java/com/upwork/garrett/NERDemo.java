@@ -44,10 +44,8 @@ public class NERDemo {
     public static void main(String[] args) throws Exception {
 
         // Create model using props file
-        String serializedClassifier = "src/main/classifiers/english.all.3class.distsim.crf.ser.gz";
-        if (args.length > 0) {
-            serializedClassifier = args[0];
-        }
+        String serializedClassifier = "src/main/classifiers/music-pos-tagger-model.ser.gz";
+
 
         AbstractSequenceClassifier<CoreLabel> classifier = CRFClassifier.getClassifier(serializedClassifier);
 
@@ -59,14 +57,20 @@ public class NERDemo {
 
         String Scientist = sampleText.keySet().stream().findFirst().toString();
 
+            // This prints out all the details of what is stored for each token
+          /*  Interesting piece of code to use for each token
+            */
 
-        for (String str : example) {
-            for (List<CoreLabel> lcl : classifier.classify(str)) {
-                for (CoreLabel cl : lcl) {
-                    String tempString = cl.toShorterString();
-                    String unfinishedString = tempString.substring(tempString.indexOf(" Answer=") + 8);
-                    String musicCheck = unfinishedString.substring(0, unfinishedString.length()-1);
-                    System.out.println(musicCheck);
+            for (String str : example) {
+                for (List<CoreLabel> lcl : classifier.classify(str)) {
+                    for (CoreLabel cl : lcl) {
+                        String tempString = cl.toShorterString();
+                        String unfinishedString = tempString.substring(tempString.indexOf(" Answer=") + 8);
+                        String musicCheck = unfinishedString.substring(0, unfinishedString.length()-1);
+                        System.out.println(musicCheck);
+                        if (musicCheck == "music") {
+                            // Add Text to doc
+                        }
 
                     if (musicCheck == "MUSIC") {
                         possibleMusicians.put(Scientist, str);
