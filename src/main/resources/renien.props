@@ -1,0 +1,8 @@
+model = retail_queries.model
+arch = generic,suffix(4),prefix(4),unicodeshapes(-1,1),unicodeshapeconjunction(-1,1),words(-2,-2),words(2,2)
+trainFile = /Users/satishterala/Work/EinsteinViolin/src/main/resources/renien.train
+tagSeparator = _
+encoding = utf-8
+iterations = 100
+openClassTags = A Adv ET NC NP V
+tokenize = true

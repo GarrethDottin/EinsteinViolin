@@ -1,12 +1,9 @@
 package com.upwork.garrett;
 
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
-import edu.stanford.nlp.ie.crf.*;
-import edu.stanford.nlp.io.IOUtils;
+import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.sequences.DocumentReaderAndWriter;
-import edu.stanford.nlp.util.Triple;
+
 import java.util.List;
 
 
@@ -40,7 +37,7 @@ public class NERDemo {
     public static void main(String[] args) throws Exception {
 
         // Create model using props file
-        String serializedClassifier = "src/main/classifiers/music-pos-tagger-model.ser.gz";
+        String serializedClassifier = "/Users/satishterala/Work/EinsteinViolin/ner-model.ser.gz";
 
         if (args.length > 0) {
             serializedClassifier = args[0];
