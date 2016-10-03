@@ -31,3 +31,4 @@ veryCommonWordThresh = 250
 xmlInput = null
 outputFormatOptions =
 nthreads = 1
+
