@@ -60,19 +60,15 @@ public class EntityNameAnnotationsExample {
         // inputText will be the text to evaluate in this examplefileName
         URL url = Thread.currentThread().getContextClassLoader().getResource(fileName);
         File file = FileUtils.toFile(url);
-        String text1 = FileUtils.readFileToString(file);
+        String text = FileUtils.readFileToString(file);
 
         String sampleTxt = "He sat down at his piano and started playing. He continued playing and writing notes for half an hour.At the end of the two weeks, he came downstairs with two sheets of paper bearing his theory.He could also play the esraj, a musical instrument similar to a violin";
-        Annotation document = new Annotation(sampleTxt);
+        Annotation document = new Annotation(text);
         document.set(CoreAnnotations.DocDateAnnotation.class, currentTime);
         return document;
     }
 
     public static void main(String[] args) throws IOException {
-        // Read Training File
-        // Instantiate music word dictionary
-        // Create list of potential trigger words from training file
-        // Run the Training File Against the music word dictionary
         EntityNameAnnotationsExample EVTest = new EntityNameAnnotationsExample();
         ReadCSV createHash = new ReadCSV();
         HashMap<String,String> musicDictionary = createHash.createDictionaryHash();

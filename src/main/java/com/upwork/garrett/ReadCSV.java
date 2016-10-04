@@ -31,7 +31,6 @@ public class ReadCSV {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(list);
         return list;
     }
 
