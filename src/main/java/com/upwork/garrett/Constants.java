@@ -6,6 +6,7 @@ import java.util.HashMap;
  * Created by garrethdottin on 9/1/16.
  */
 public class Constants {
+    public static final String HOME_ROUTE = "/Users/garrethdottin/Desktop/tf-idf-vectorizer/src/main/resources/outputFile.json";
     public static final HashMap<String, Integer> VOCAB_WEIGHTS = new HashMap<String, Integer>() {{
         put("played music", 2);
         put("violin", 1);
