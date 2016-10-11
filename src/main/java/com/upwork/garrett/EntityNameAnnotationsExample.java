@@ -67,17 +67,12 @@ public class EntityNameAnnotationsExample {
     public void checkScientistSet (HashMap ScientistSet) {
         // can check a group of scientist for data
         // Loop over Hashmap
-        // Loop over setence fragments
-        // Once its done with each item set
+        // Loop over setence fragments within individual fragment
+        // Once its done with each item set the currentscientist
         for (Object Scientist : ScientistSet.entrySet()){
             System.out.println(Scientist);
         }
-//        for (int i = 0; i < sentenceFragment.size(); i++) {
-//            Annotation document = EVTest.prepDoc(currentSentence);
-//            pipeLine.annotate(document);
-//            List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
-//            identifySentenceTags(sentences);
-//        }
+
 
     }
     private void cycleThroughScientistText  (ArrayList sentenceFragment,EntityNameAnnotationsExample EVTest,StanfordCoreNLP pipeLine, HashMap<String,String> musicDictionary  ) throws IOException{
