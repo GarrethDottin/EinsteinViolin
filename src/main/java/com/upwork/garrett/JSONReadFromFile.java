@@ -43,20 +43,22 @@ public class JSONReadFromFile  {
         return allScientists;
     }
 
-    public HashMap cycleSelectScientists (Results allScientists, Integer startingPoint, Integer endingPoint) {
+    public ArrayList<HashMap<String, ArrayList<String>>> cycleSelectScientists (Results allScientists, Integer startingPoint, Integer endingPoint) {
         JSONReadFromFile JSONParser = new JSONReadFromFile();
         // Return a Hash with the Scientist Name the an array
-        HashMap<String, ArrayList<String>> selectedScientists = new HashMap<>();
+        ArrayList<HashMap<String, ArrayList<String>>> ScientistSet = new ArrayList();
         for (Integer i = startingPoint; i < endingPoint; i++){
+            HashMap<String, ArrayList<String>> selectedScientist = new HashMap<>();
             Scientist currentScientist = allScientists.getResults().get(i);
             String scientistName = currentScientist.getTitle();
             ArrayList ParsedResults = JSONParser.splitTextBySentence(currentScientist);
-            selectedScientists.put(scientistName, ParsedResults);
+            selectedScientist.put(scientistName, ParsedResults);
+            ScientistSet.add(selectedScientist);
         }
-        return selectedScientists;
+        return ScientistSet;
     }
 
-    public Scientist indivScientist (Results allScientists) {
+    public Scientist getindivScientist (Results allScientists) {
         Scientist individualScientist = allScientists.getResults().get(39);
         currentScientistCount++;
         checkEndScientistsObj(allScientists);

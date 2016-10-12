@@ -29,57 +29,68 @@ import java.util.*;
  */
 public class EntityNameAnnotationsExample {
     private static HashMap<String,ArrayList<String>> PotentialTriggerWords = new HashMap<String, ArrayList<String>>();
-    private static String currentScientist = "";
+    private static String currentScientist = "Peter_Aaby";
     private static ArrayList<String> polyMaths = new ArrayList<>();
     private static Properties props = createProps();
+    private static StanfordCoreNLP pipeLine;
 
     public static void main(String[] args) throws IOException {
+
+        // Init StanfordLibrary
+        pipeLine = new StanfordCoreNLP(props);
 
 
         // Create Music Dictionary
         EntityNameAnnotationsExample EVTest = new EntityNameAnnotationsExample();
         ReadCSV createHash = new ReadCSV();
         HashMap<String,String> musicDictionary = createHash.createDictionaryHash();
-        WordVecDictionary expandedDictionary = new WordVecDictionary();
-//        expandedDictionary.initDictionary();
+
+//        WordVecDictionary expandedDictionary = new WordVecDictionary();
+
+        // expandedDictionary.initDictionary();
 
         // Get list of Scientists Objects
         JSONReadFromFile test = new JSONReadFromFile();
         Results scientists = test.initScientistsObject();
-        HashMap setOfScientists =  test.cycleSelectScientists(scientists, 0,10);
-        EVTest.checkScientistSet(setOfScientists);
-        Scientist scientistOnBoard = test.indivScientist(scientists);
+        ArrayList<HashMap<String, ArrayList<String>>> setOfScientists =  test.cycleSelectScientists(scientists, 3,10);
+
+
+        EVTest.checkScientistSet(setOfScientists, musicDictionary);
+        Scientist scientistOnBoard = test.getindivScientist(scientists);
+
+        //
         currentScientist = scientistOnBoard.getTitle();
         ArrayList sentenceFragment = test.splitTextBySentence(scientistOnBoard);
 
-
-        // Init Props
-        Properties props = createProps();
-        StanfordCoreNLP pipeLine = new StanfordCoreNLP(props);
-
-        ArrayList<String> triggerWords = new ArrayList<String>();
-        PotentialTriggerWords.put(currentScientist,triggerWords);
-
-        EVTest.cycleThroughScientistText(sentenceFragment,EVTest, pipeLine, musicDictionary);
     }
 
+    public void checkScientistSet (ArrayList<HashMap<String, ArrayList<String>>> ScientistSet,HashMap<String,String> musicDictionary ) throws IOException {
+        ScientistSet.forEach((key) ->{
+            currentScientist = key.keySet().toString().replace("[", "").replace("]", "");
 
-    public void checkScientistSet (HashMap ScientistSet) {
-        // can check a group of scientist for data
-        // Loop over Hashmap
-        // Loop over setence fragments within individual fragment
-        // Once its done with each item set the currentscientist
-        for (Object Scientist : ScientistSet.entrySet()){
-            System.out.println(Scientist);
-        }
+            // Create Trigger Words
+            ArrayList<String> triggerWords = new ArrayList<String>();
+            PotentialTriggerWords.put(currentScientist,triggerWords);
 
+            // Set of Sentences
+            Collection values = key.values();
+            ArrayList sentenceFragments = new ArrayList<String>(values);
+
+            try {
+                this.cycleThroughScientistText(sentenceFragments, pipeLine, musicDictionary);
+            }
+            catch(IOException e){
+                System.out.println(e);
+            }
+        });
+        System.out.println(polyMaths);
 
     }
-    private void cycleThroughScientistText  (ArrayList sentenceFragment,EntityNameAnnotationsExample EVTest,StanfordCoreNLP pipeLine, HashMap<String,String> musicDictionary  ) throws IOException{
+    private void cycleThroughScientistText  (ArrayList sentenceFragment,StanfordCoreNLP pipeLine, HashMap<String,String> musicDictionary) throws IOException{
 
         for (int i = 0; i < sentenceFragment.size(); i++) {
             String currentSentence = sentenceFragment.get(i).toString();
-            Annotation document = EVTest.prepDoc(currentSentence);
+            Annotation document = this.prepDoc(currentSentence);
             pipeLine.annotate(document);
             List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
             identifySentenceTags(sentences);
