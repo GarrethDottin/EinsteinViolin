@@ -6,7 +6,6 @@ import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.deeplearning4j.ui.UiServer;
 import java.io.IOException;
 import java.util.Collection;
 import org.datavec.api.util.ClassPathResource;
@@ -17,17 +16,28 @@ import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
-import org.deeplearning4j.ui.UiServer;
+import org.datavec.api.util.ClassPathResource;
+import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
+import org.deeplearning4j.models.word2vec.Word2Vec;
+import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
+import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
+import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFactory;
+import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 /**
  * Created by garrethdottin on 10/8/16.
  */
 public class WordVecDictionary {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  throws IOException{
+        WordVecDictionary expandedDictionary = new WordVecDictionary();
+        String filePath = new ClassPathResource("Bach.txt").getFile().getAbsolutePath();
+        SentenceIterator iterator = new BasicLineIterator(filePath);
 
+        TokenizerFactory token = tokenizeData();
+        trainModel(token, iterator);
     }
 
     // Download Libaries
@@ -41,7 +51,7 @@ public class WordVecDictionary {
 
     }
 
-    public SentenceIterator processText(String  file) throws IOException {
+    public static SentenceIterator processText(String  file) throws IOException {
 
         String filePath = new ClassPathResource(file).getFile().getAbsolutePath();
         SentenceIterator iter = new BasicLineIterator(filePath);
@@ -49,13 +59,13 @@ public class WordVecDictionary {
         return iter;
     }
 
-    public TokenizerFactory tokenizeData(){
+    public static TokenizerFactory tokenizeData(){
         TokenizerFactory t = new DefaultTokenizerFactory();
         t.setTokenPreProcessor(new CommonPreprocessor());
         return t;
     }
 
-    public void trainModel(TokenizerFactory t,SentenceIterator iter ) {
+    public static void trainModel(TokenizerFactory t,SentenceIterator iter ) {
         System.out.println("Building model....");
         Word2Vec vec = new Word2Vec.Builder()
                 .minWordFrequency(2)
@@ -66,7 +76,7 @@ public class WordVecDictionary {
                 .iterate(iter)
                 .tokenizerFactory(t)
                 .build();
-
+        vec.fit();
         System.out.println("Closest Words:");
         Collection<String> lst = vec.wordsNearest("music", 5);
         System.out.println(lst);
