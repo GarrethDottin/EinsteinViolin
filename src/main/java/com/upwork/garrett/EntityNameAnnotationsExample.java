@@ -35,7 +35,6 @@ public class EntityNameAnnotationsExample {
     private static StanfordCoreNLP pipeLine;
 
     public static void main(String[] args) throws IOException {
-
         // Init StanfordLibrary
         pipeLine = new StanfordCoreNLP(props);
 
@@ -45,9 +44,8 @@ public class EntityNameAnnotationsExample {
         ReadCSV createHash = new ReadCSV();
         HashMap<String,String> musicDictionary = createHash.createDictionaryHash();
 
-//        WordVecDictionary expandedDictionary = new WordVecDictionary();
-
-        // expandedDictionary.initDictionary();
+        // WordVecDictionary expandedDictionary = new WordVecDictionary();
+        //  expandedDictionary.initDictionary();
 
         // Get list of Scientists Objects
         JSONReadFromFile test = new JSONReadFromFile();
@@ -90,15 +88,15 @@ public class EntityNameAnnotationsExample {
 
         for (int i = 0; i < sentenceFragment.size(); i++) {
             String currentSentence = sentenceFragment.get(i).toString();
-            Annotation document = this.prepDoc(currentSentence);
+            Annotation document = this.StanfordHelperPrepDoc(currentSentence);
             pipeLine.annotate(document);
             List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
-            identifySentenceTags(sentences);
+            identifySentenceStructure(sentences);
         }
             checkIfArtist(PotentialTriggerWords, currentScientist,musicDictionary);
     }
 
-    private Annotation prepDoc(String inputText) throws IOException {
+    private Annotation StanfordHelperPrepDoc(String inputText) throws IOException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String currentTime = formatter.format(System.currentTimeMillis());
         Annotation document = new Annotation(inputText);
@@ -107,7 +105,7 @@ public class EntityNameAnnotationsExample {
     }
 
 
-    public static void checkIfArtist (HashMap<String,ArrayList<String>> PotentialTriggerWords,String scientist, HashMap<String,String> musicDictionary ){
+    private static void checkIfArtist (HashMap<String,ArrayList<String>> PotentialTriggerWords,String scientist, HashMap<String,String> musicDictionary ){
         // return a hashmap an add the item
         ArrayList<String> listOfWords = PotentialTriggerWords.get(scientist);
         for (String triggerWord : listOfWords) {
@@ -122,7 +120,7 @@ public class EntityNameAnnotationsExample {
         System.out.println(polyMaths);
     }
 
-    public static HashMap<String,ArrayList<String>> identifySentenceTags(List<CoreMap> sentences) {
+    private static HashMap<String,ArrayList<String>> identifySentenceStructure(List<CoreMap> sentences) {
         for (CoreMap sentence : sentences) {
             /* Next we will extract the SemanticGraph to examine the connection
             between the words in our evaluated sentence */
@@ -142,6 +140,7 @@ public class EntityNameAnnotationsExample {
         props.put("regexner.ignoreCase", "true");
         return props;
     }
+
     private static void createListTriggerWords(List<SemanticGraphEdge> outEdgesSorted) {
         String noun = "NN";
 
