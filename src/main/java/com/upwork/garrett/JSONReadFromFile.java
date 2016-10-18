@@ -1,12 +1,17 @@
 package com.upwork.garrett;
 
-import net.didion.jwnl.data.Exc;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by dottig2-adm on 10/5/2016.
@@ -14,37 +19,61 @@ import java.io.IOException;
 public class JSONReadFromFile  {
     public Boolean endofScientistArray = false;
     private Integer currentScientistCount = 0;
+    public Results allScientists;
+
 
     public static void main(String[] args) throws IOException{
-        // Needs to take in an array of JSON COM
-        // loop over each json array and return the JSON object (Each time you call it, it should return you the next item in the file
-        // While a certain value is true (Include this in the main class)
-        // Splice up the Text into manageable chunks
+
     }
 
-    public JSONArray initObjects(String[] args) throws IOException {
-        JSONArray scientists = new JSONArray();
+    public Results initScientistsObject() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(
+                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader("C:/Users/dottig2-adm/Desktop/EinsteinViolin/src/main/classifiers/Scientists"));
-            JSONObject jsonObject = (JSONObject) obj;
-            scientists = (JSONArray) jsonObject.get("scientists");
+            allScientists = mapper.readValue(new File("/Users/garrethdottin/Desktop/tf-idf-vectorizer/src/main/resources/outputFile.json"), Results.class);
         }
         catch (Exception e) {
             System.out.println(e);
         }
-        return scientists;
+        return allScientists;
     }
 
-    private  JSONObject indivObj (JSONArray scientists) {
-        JSONObject individualScientist = (JSONObject) scientists.get(currentScientistCount);
+    public ArrayList<HashMap<String, ArrayList<String>>> cycleSelectScientists (Results allScientists, Integer startingPoint, Integer endingPoint) {
+        JSONReadFromFile JSONParser = new JSONReadFromFile();
+        // Return a Hash with the Scientist Name the an array
+        ArrayList<HashMap<String, ArrayList<String>>> ScientistSet = new ArrayList();
+        for (Integer i = startingPoint; i < endingPoint; i++){
+            HashMap<String, ArrayList<String>> selectedScientist = new HashMap<>();
+            Scientist currentScientist = allScientists.getResults().get(i);
+            String scientistName = currentScientist.getTitle();
+            ArrayList ParsedResults = JSONParser.splitTextBySentence(currentScientist);
+            selectedScientist.put(scientistName, ParsedResults);
+            ScientistSet.add(selectedScientist);
+        }
+        return ScientistSet;
+    }
+
+    public Scientist getindivScientist (Results allScientists, Integer num) {
+        Scientist individualScientist = allScientists.getResults().get(num);
         currentScientistCount++;
-        checkEndObj(scientists);
+        checkEndScientistsObj(allScientists);
         return individualScientist;
     }
 
-    private void checkEndObj(JSONArray scientists) {
-        if (scientists.size()  == currentScientistCount ) {
+    public ArrayList splitTextBySentence (Scientist scientistObj) {
+        String text = scientistObj.getText();
+
+        String[] arrayOfScientists = text.split("(?<=[a-z])\\.");
+        ArrayList<String> modifiedArrayOfScientists = new ArrayList<String>(Arrays.asList(arrayOfScientists));
+
+        return modifiedArrayOfScientists;
+    }
+
+    private void checkEndScientistsObj(Object scientists) {
+        if (allScientists.getResults().size()  == currentScientistCount ) {
             endofScientistArray = true;
         }
     }
