@@ -36,6 +36,7 @@ public class EntityNameAnnotationsExample {
     private static Properties props = createProps();
     private static StanfordCoreNLP pipeLine;
     private static HashMap<String,String> musicDictionary = new HashMap();
+    private static HashMap<String, ArrayList> scientistAndTaggedSentences = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         // Init StanfordLibrary
@@ -53,6 +54,16 @@ public class EntityNameAnnotationsExample {
         EVTest.testingData(jsonReader, scientists);
     }
 
+    private HashMap<String, ArrayList> cycleThroughScientists(Results scientists) {
+
+        for (Scientist scientist: scientists.getResults()){
+            currentScientist = scientist.getTitle();
+            HashMap lemmas = this.lemmatize(scientist.getText());
+            HashMap<String, ArrayList<Integer>> scientistCheck = this.polyMathCheck(lemmas, musicDictionary,currentScientist);
+            this.taggedSentence(scientist, scientistCheck);
+        }
+        return scientistAndTaggedSentences;
+    }
     private void testingData(JSONReadFromFile jsonReader, Results scientists) {
         Scientist firstScientist = jsonReader.getindivScientist(scientists, 28);
         Scientist secondScientist = jsonReader.getindivScientist(scientists, 39);
@@ -116,7 +127,7 @@ public class EntityNameAnnotationsExample {
         return newScientist;
     }
 
-    public ArrayList<CoreMap> taggedSentence(Scientist scientist, HashMap<String, ArrayList<Integer>> metaData){
+    public HashMap<String, ArrayList> taggedSentence(Scientist scientist, HashMap<String, ArrayList<Integer>> metaData){
         Annotation document = new Annotation(scientist.getText());
         pipeLine.annotate(document);
         ArrayList<CoreMap> PotentialArtistSentences = new ArrayList<>();
@@ -126,7 +137,9 @@ public class EntityNameAnnotationsExample {
             PotentialArtistSentences.add(sentences.get(k - 1));
         });
 
-        return PotentialArtistSentences;
+        scientistAndTaggedSentences.put(currentScientist, PotentialArtistSentences);
+
+        return scientistAndTaggedSentences;
     }
 
     private static Properties createProps() {
