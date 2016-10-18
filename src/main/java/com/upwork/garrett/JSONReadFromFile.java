@@ -57,8 +57,8 @@ public class JSONReadFromFile  {
         return ScientistSet;
     }
 
-    public Scientist getindivScientist (Results allScientists) {
-        Scientist individualScientist = allScientists.getResults().get(39);
+    public Scientist getindivScientist (Results allScientists, Integer num) {
+        Scientist individualScientist = allScientists.getResults().get(num);
         currentScientistCount++;
         checkEndScientistsObj(allScientists);
         return individualScientist;

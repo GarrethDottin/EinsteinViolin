@@ -68,9 +68,9 @@ public class WordVecDictionary {
     public static void trainModel(TokenizerFactory t,SentenceIterator iter ) {
         System.out.println("Building model....");
         Word2Vec vec = new Word2Vec.Builder()
-                .minWordFrequency(2)
-                .iterations(1)
-                .layerSize(100)
+                .minWordFrequency(1)
+                .iterations(10)
+                .layerSize(300)
                 .seed(42)
                 .windowSize(5)
                 .iterate(iter)
@@ -78,7 +78,7 @@ public class WordVecDictionary {
                 .build();
         vec.fit();
         System.out.println("Closest Words:");
-        Collection<String> lst = vec.wordsNearest("music", 5);
+        Collection<String> lst = vec.wordsNearest("violin", 6);
         System.out.println(lst);
     }
 

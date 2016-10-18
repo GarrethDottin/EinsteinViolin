@@ -6,6 +6,8 @@ import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.RegexNERAnnotator;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
 import edu.stanford.nlp.pipeline.TokensRegexAnnotator;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
@@ -33,33 +35,59 @@ public class EntityNameAnnotationsExample {
     private static ArrayList<String> polyMaths = new ArrayList<>();
     private static Properties props = createProps();
     private static StanfordCoreNLP pipeLine;
+    private static HashMap<String,String> musicDictionary = new HashMap();
 
     public static void main(String[] args) throws IOException {
         // Init StanfordLibrary
         pipeLine = new StanfordCoreNLP(props);
 
-
         // Create Music Dictionary
         EntityNameAnnotationsExample EVTest = new EntityNameAnnotationsExample();
         ReadCSV createHash = new ReadCSV();
-        HashMap<String,String> musicDictionary = createHash.createDictionaryHash();
-
-        // WordVecDictionary expandedDictionary = new WordVecDictionary();
-        //  expandedDictionary.initDictionary();
+        musicDictionary = createHash.createDictionaryHash();
 
         // Get list of Scientists Objects
-        JSONReadFromFile test = new JSONReadFromFile();
-        Results scientists = test.initScientistsObject();
-        ArrayList<HashMap<String, ArrayList<String>>> setOfScientists =  test.cycleSelectScientists(scientists, 3,10);
+        JSONReadFromFile jsonReader = new JSONReadFromFile();
+        Results scientists = jsonReader.initScientistsObject();
+//        ArrayList<HashMap<String, ArrayList<String>>> setOfScientists =  jsonReader.cycleSelectScientists(scientists, 3,10);
+//        EVTest.checkScientistSet(setOfScientists, musicDictionary);
 
+        EVTest.testingData(jsonReader, scientists);
+    }
 
-        EVTest.checkScientistSet(setOfScientists, musicDictionary);
-        Scientist scientistOnBoard = test.getindivScientist(scientists);
+    private void testingData(JSONReadFromFile jsonReader, Results scientists) {
+        Scientist firstScientist = jsonReader.getindivScientist(scientists, 28);
+        Scientist secondScientist = jsonReader.getindivScientist(scientists, 39);
+        Scientist thirdScientist = jsonReader.getindivScientist(scientists, 139);
+        Scientist fourthScientist = jsonReader.getindivScientist(scientists, 314);
+        Scientist fifthScientist = jsonReader.getindivScientist(scientists, 144);
+        Scientist sixthScientist = jsonReader.getindivScientist(scientists, 149);
+        Scientist seventhScientist = jsonReader.getindivScientist(scientists, 0);
+        Scientist eigthScientist = jsonReader.getindivScientist(scientists, 1);
+        Scientist ninthScientist = jsonReader.getindivScientist(scientists, 2);
+        Scientist tenthScientist = jsonReader.getindivScientist(scientists, 271);
 
-        //
-        currentScientist = scientistOnBoard.getTitle();
-        ArrayList sentenceFragment = test.splitTextBySentence(scientistOnBoard);
+        currentScientist = secondScientist.getTitle();
+        System.out.println(currentScientist);
+        secondScientist.setText("He was the music man. Michael was a talented musician.");
+        HashMap lemmas = this.lemmatize("He was the music man. Michael was a talented musician.");
+        HashMap<String, ArrayList<Integer>> scientistCheck = this.polyMathCheck(lemmas, musicDictionary,currentScientist);
+        this.taggedSentence(secondScientist, scientistCheck);
+    }
 
+    public void checkIndividualScientist(Scientist scientist,HashMap<String,String> musicDictionary){
+        currentScientist = scientist.getTitle();
+        JSONReadFromFile jsonReader = new JSONReadFromFile();
+        ArrayList sentenceFragments = jsonReader.splitTextBySentence(scientist);
+
+        ArrayList<String> triggerWords = new ArrayList<String>();
+        PotentialTriggerWords.put(currentScientist,triggerWords);
+        try {
+            this.cycleThroughScientistText(sentenceFragments, pipeLine, musicDictionary);
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
     }
 
     public void checkScientistSet (ArrayList<HashMap<String, ArrayList<String>>> ScientistSet,HashMap<String,String> musicDictionary ) throws IOException {
@@ -84,6 +112,7 @@ public class EntityNameAnnotationsExample {
         System.out.println(polyMaths);
 
     }
+
     private void cycleThroughScientistText  (ArrayList sentenceFragment,StanfordCoreNLP pipeLine, HashMap<String,String> musicDictionary) throws IOException{
 
         for (int i = 0; i < sentenceFragment.size(); i++) {
@@ -104,7 +133,6 @@ public class EntityNameAnnotationsExample {
         return document;
     }
 
-
     private static void checkIfArtist (HashMap<String,ArrayList<String>> PotentialTriggerWords,String scientist, HashMap<String,String> musicDictionary ){
         // return a hashmap an add the item
         ArrayList<String> listOfWords = PotentialTriggerWords.get(scientist);
@@ -119,6 +147,41 @@ public class EntityNameAnnotationsExample {
         }
         System.out.println(polyMaths);
     }
+
+    private HashMap<String, ArrayList<Integer>> polyMathCheck (HashMap<String, Integer> Lemmas, HashMap<String,String> musicDictionary, String currentScientist ){
+        // return a hashmap an add the item
+        HashMap<String, ArrayList<Integer>> newScientist = new HashMap();
+        ArrayList<Integer> Integers = new ArrayList();
+
+        Lemmas.forEach((k,v) ->{
+            for (String instrument : musicDictionary.keySet()) {
+                if (k.equals(instrument)) {
+                    Integers.add(v);
+                    newScientist.put(currentScientist, Integers);
+                    break;
+                }
+            }
+        });
+        System.out.println(newScientist);
+        return newScientist;
+    }
+
+    public ArrayList<CoreMap> taggedSentence(Scientist scientist, HashMap<String, ArrayList<Integer>> metaData){
+        Annotation document = new Annotation(scientist.getText());
+
+        pipeLine.annotate(document);
+        ArrayList<CoreMap> PotentialArtistSentences = new ArrayList<>();
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        ArrayList<Integer> taggedSentencePosition = metaData.get(scientist.getTitle());
+        taggedSentencePosition.forEach((k) -> {
+            PotentialArtistSentences.add(sentences.get(k - 1));
+        });
+
+        return PotentialArtistSentences;
+    }
+
+    // Create Method that grabs the sentence of the current scientist
+    // Make sure the format for the current scientst is the same as everywhere else 
 
     private static HashMap<String,ArrayList<String>> identifySentenceStructure(List<CoreMap> sentences) {
         for (CoreMap sentence : sentences) {
@@ -136,9 +199,43 @@ public class EntityNameAnnotationsExample {
 
     private static Properties createProps() {
         Properties props = new Properties();
+        props.put("annotators", "tokenize, ssplit, pos, lemma");
+        props.put("regexner.ignoreCase", "true");
+        return props;
+    }
+
+    private static Properties createAdvanceProps() {
+        Properties props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma,ner,regexner  ,parse, dcoref");
         props.put("regexner.ignoreCase", "true");
         return props;
+    }
+
+    public HashMap<String,Integer> lemmatize(String documentText) {
+        ArrayList<String> lemmas = new ArrayList<String>();
+        HashMap<String,Integer> lemmaSet = new HashMap();
+
+        // create an empty Annotation just with the given text
+        Annotation document = new Annotation(documentText);
+
+        // run all Annotators on this text
+        pipeLine.annotate(document);
+
+        Integer Counter = 0;
+        // Iterate over all of the sentences found
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        for(CoreMap sentence: sentences) {
+            Counter++;
+            // Iterate over all tokens in a sentence
+
+            for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
+                // Retrieve and add the lemma for each word into the list of lemmas
+//                lemmas.add(token.get(LemmaAnnotation.class));
+                lemmaSet.put(token.get(LemmaAnnotation.class), Counter);
+            }
+        }
+
+        return lemmaSet;
     }
 
     private static void createListTriggerWords(List<SemanticGraphEdge> outEdgesSorted) {
@@ -158,5 +255,44 @@ public class EntityNameAnnotationsExample {
         }
     }
 
+    private void analyzeSentenceStructure(List<SemanticGraphEdge> outEdgesSorted) {
+        String noun = "NN";
+        SemanticGraphEdge firstItem = outEdgesSorted.get(0);
+        String Name = firstItem.getTarget().value();
 
+        if (firstItem.getRelation().getShortName().equals("nsubj") || firstItem.getRelation().getShortName().equals("nsubjpass")) {
+            if (Name.equals(currentScientist) || Name.equals("He") || Name.equals("She")){
+                // Check whether the edge is in the dictionary
+                //firstItem.getGovernor()
+                // firstItem.getSource()
+
+            }
+        }
+        for (SemanticGraphEdge edge : outEdgesSorted) {
+            edge.getTarget();
+            IndexedWord dep = edge.getDependent();
+
+        }
+
+    }
+
+    private void createEdgeGraph(String documentText) throws IOException{
+        Annotation document = this.StanfordHelperPrepDoc(documentText);
+        pipeLine.annotate(document);
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        for (CoreMap sentence : sentences) {
+            SemanticGraph dependencies = sentence.get
+                    (SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
+            IndexedWord firstRoot = dependencies.getFirstRoot();
+            // this section is same as above just we retrieve the OutEdges
+            List<SemanticGraphEdge> outEdgesSorted = dependencies.getOutEdgesSorted(firstRoot);
+            this.analyzeSentenceStructure(outEdgesSorted);
+        }
+
+    }
 }
+
+
+
+    //
+    //

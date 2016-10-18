@@ -1,422 +1,433 @@
-Accordion,music
-harp,music
-Ahoko  ,music
-Ajaeng,music
-Alboka ,music
-Alphorn,music
-Alpine  ,music
-clarinet,music
-flute,music
-horn,music
-sarrusophone,music
-saxophone,music
-Angklung,music
-Archlute,music
-Arghul ,music
-Arpeggione ,music
-Array  ,music
-Aru-ding,music
-Aulochrome,music
-Babendil,music
-Baglama ,music
-Balafon,music
-Balalaika,music
-Bandola ,music
-Bandoneón,music
-Bandurria ,music
-Banhu,music
-Banjo ,music
-Barbat ,music
-Baritone ,music
-Flute,music
-Baryton,music
-Drum,music
-Bass ,music
-sarrusophone,music
-saxophone,music
-oboe,music
-Cor,music
-horn,music
-Bassoon,music
-Bawu,music
-Bayan,music
-Bazooka,music
-Bell,music
-Berimbao,music
-Bianqing ,music
-Bianzhong ,music
-Bifora,music
-Biniou,music
-Biwa,music
-Bock,music
-Bodega ,music
-Bodhrán,music
-Boha,music
-Bombarde,music
-Bombardino,music
-Bongo  ,music
-bagpipe,music
-Bordonua,music
-Bouzouki ,music
-Bullroarer,music
-accordian,music
-Cabrette,music
-Calliope ,music
-Carillon,music
-Castanets,music
-Cavaco ,music
-Cavaquinho,music
-Caxixi ,music
-Celesta,music
-Cello ,music
-Ceng ,music
-Chabrette,music
-Chapman ,music
-Charango ,music
-Chenda ,music
-Chi,music
-Chimes,music
-Ching ,music
-Chitaronne,music
-Chitarra ,music
-Chromatic,music
-Cimbalom,music
-Cimbasso,music
-Cimpoi ,music
-Cittern,music
-Clarinette,music
-Clavicembelo ,music
-Clavichord,music
-Concertina,music
-conch,music
-Conga ,music
-Sarrusophone,music
-Contrabassoon,music
-Cornet,music
-Cowbell,music
-Cromorne,music
-Crumhorn,music
-Crwth ,music
-Cuatro,music
-Cuíca ,music
-Cymbals ,music
-Cymbalum,music
-Dabakan,music
-Dadihu,music
-Dahu,music
-Daiko,music
-Dankiyo,music
-Daraboukka ,music
-Darabukka,music
-Darbuka,music
-Darvyra,music
-Dhol,music
-Dholak,music
-Didgeridoo,music
-Dihu,music
-Diyingehu,music
-Djembe,music
-Doedelzak,music
-Dombak ,music
-Domra,music
-Dotara,music
-cuprophone,music
-stylophone,music
-Dudelsack,music
-Dudy,music
-Duff,music
-Dulcian,music
-Dulcimer ,music
-Dulzaina,music
-Dumbelek,music
-Dutar,music
-Duxianqin,music
-Ektara ,music
-Erhu,music
-Erxian,music
-Euphonium ,music
-Fangxiang ,music
-Fiddle,music
-Fiscarmonica ,music
-Flageolets,music
-Flugelhorn,music
-Folgerphone,music
-Gaida,music
-Gaita,music
-Gajdy,music
-Gambang,music
-Gandingan ,music
-Ganza,music
-Gaohu ,music
-Gayageum,music
-Gehu,music
-Glasschord,music
-Glockenspiel,music
-Gong,music
-Gottuvadhyam,music
-bagpipe,music
-warpipes,music
-Guan,music
-Gugin,music
-Guiro,music
-Guitar,music
-Guitar,music
-Guitarrón,music
-Guqin,music
-Gusle,music
-Gusli,music
-Guzheng,music
-Hammered dulcimer,music
-Handbells,music
-Hang,music
-fiddle,music
-Organ,music
-Harp,music
-Harpsichord,music
-Heckelphone,music
-Hegelong,music
-Hélicon,music
-Hichiriki,music
-Hocchiku,music
-Horagai,music
-Horn,music
-Hosho,music
-Hsaio,music
-Huemmelchen,music
-Huluhu,music
-Hun,music
-Horn,music
-Huqin,music
-Igil,music
-Inci,music
-Ipu,music
-Uilleann,music
-Janggu,music
-Shakuhachi,music
-harp,music
-Jiaohu,music
-Jinghu,music
-Kadlong,music
-Kagul,music
-Kangling,music
-Kaval,music
-Timpani,music
-Bugle,music
-Trumpet,music
-Khene,music
-Khim,music
-Khloy,music
-Khol,music
-Kissar,music
-Knatele,music
-Kokyu,music
-Komungo,music
-Kora,music
-Koto,music
-Koudi,music
-Koziol,music
-Kubing,music
-Kulintang a putao/ kulintang a tiniok,music
-Kulintang/ kolintang,music
-Kutiyapi,music
-Kwa-yen,music
-Lambeg ,music
-Langeleik,music
-Laruan,music
-Launeddas,music
-Leier,music
-Leiqin ,music
-Lirone,music
-Lithophone,music
-Lusheng,music
-Lute,music
-Maguhu,music
-Malimba,music
-Mando-bass,music
-Mandocello,music
-Mandola,music
-Mandolin,music
-Mangtong,music
-Maraca,music
-Marimba,music
-Marimbao,music
-Marinbaphone,music
-Mbira/ Sanza/ Thumb Piano,music
-Mellophone,music
-Mellotron,music
-Melodeon,music
-Melodica,music
-Metallophones,music
-Mijwiz,music
-Mittlealtersackpfeife,music
-Mizwad,music
-Moodswinger,music
-Mridangam,music
-Muchosac,music
-bow,music
-Nadaswaram,music
-Naqara,music
-Trumpet,music
-smallpipes,music
-Nyckelharpa,music
-Oboe,music
-Ocarina,music
-Octaban,music
-Octapad,music
-Octavin,music
-Octocontrabass,music
-Oliphant,music
-Ophicleide,music
-Organ,music
-Paixiao,music
-Palendang,music
-Piano,music
-Piccolo,music
-heckelphone,music
-Pipa,music
-Piva,music
-Psaltery,music
-Pulalu,music
-Qanun,music
-Quena,music
-Quinticlave,music
-Racket,music
-Rainstick,music
-Raita,music
-Rajao,music
-Ratchet,music
-Rebab,music
-Rebec,music
-Recorder,music
-contrabass,music
-Pipe,music
-tuba,music
-Ruan,music
-Ryuteki,music
-Sabar,music
-Sackbutt,music
-Säckpipa ,music
-Saenghwang,music
-Sallaneh,music
-Sampho,music
-Sampler,music
-Sang-auk,music
-Santur,music
-Sanxian,music
-Sarrusophone,music
-Saung,music
-Saxhorn,music
-Saxonette,music
-Saxophone,music
-smallpipes,music
-Serpent,music
-Serunai,music
-Setar,music
-Shamisen,music
-Shawm,music
-Shekere,music
-Sheng,music
-Shinobue,music
-Shofar,music
-Sihu,music
-Siren,music
-Sitar,music
-Slidewhistle,music
-Snaredrum,music
-saxophone,music
-clarinet,music
-mandolin,music
-saxophone,music
-soprillo,music
-Sorna,music
-Sousaphone,music
-Sralai,music
-drum,music
-guitar,music
-Suling,music
-Suona,music
-Synclavier,music
-Synthesizer,music
-Tabla,music
-Tagutok,music
-Taiko,music
-Tambour,music
-Tambourine,music
-Tamburitza,music
-Tan-tan,music
-Taphon,music
-Tar,music
-Tárogató,music
-horn,music
-mandola,music
-sarrusophone,music
-Tenoroon,music
-Teponaztli,music
-Thavil,music
-Theorbo,music
-Theremin,music
-Timpani/ kettle drum,music
-Timple,music
-Tin whistle,music
-Tjelempung/ Celempung (Javanese zither),music
-Tom-tom,music
-Tonette,music
-Torupill,music
-Trekspill,music
-Triangle,music
-Trombone,music
-Tromboon,music
-Trompeta,music
-Trumpet,music
-Tsampouna,music
-Tsuri-daiko,music
-Tuba,music
-Tuhu,music
-Tumpong ,music
-Turntables,music
-Udu,music
-Ukulele,music
-Valiha ,music
-viola,music
-Veuze,music
-Vibraphone,music
-Vielle,music
-Vihuela,music
-Viola,music
-Viola d’amore,music
-Viola da gamba,music
-Viola organista,music
-Violin,music
-Violotta,music
-Vladimirsky Rozhok,music
-Volinka,music
-Tuba,music
-Washint,music
-Washtub bass,music
-Whip ,music
-Whistle,music
-WindChimes,music
-Xiao,music
-Xiaodihu ,music
-Xun,music
-Xylophone,music
-Xylorimba ,music
-Yazheng,music
-Yehu ,music
-Yu,music
-Zampogna,music
-Zaqq ,music
-Zither,music
-Zonghu,music
-Zufalo,music
-Zurna,music
-music, music
-musician, music
-paint, music
-painter, music
-illustrator, music
-animation, music
-poet, music
-poetry, music
-lutenist, music
-lute, music
+Accordion,artist
+harp,artist
+Ahoko  ,artist
+Ajaeng,artist
+Alboka ,artist
+Alphorn,artist
+Alpine  ,artist
+clarinet,artist
+flute,artist
+horn,artist
+sarrusophone,artist
+saxophone,artist
+Angklung,artist
+Archlute,artist
+Arghul ,artist
+Arpeggione ,artist
+Array  ,artist
+Aru-ding,artist
+Aulochrome,artist
+Babendil,artist
+Baglama ,artist
+Balafon,artist
+Balalaika,artist
+Bandola ,artist
+Bandoneón,artist
+Bandurria ,artist
+Banhu,artist
+Banjo ,artist
+Barbat ,artist
+Baritone ,artist
+Flute,artist
+Baryton,artist
+Drum,artist
+Bass ,artist
+sarrusophone,artist
+saxophone,artist
+oboe,artist
+Cor,artist
+horn,artist
+Bassoon,artist
+Bawu,artist
+Bayan,artist
+Bazooka,artist
+Bell,artist
+Berimbao,artist
+Bianqing ,artist
+Bianzhong ,artist
+Bifora,artist
+Biniou,artist
+Biwa,artist
+Bock,artist
+Bodega ,artist
+Bodhrán,artist
+Boha,artist
+Bombarde,artist
+Bombardino,artist
+Bongo  ,artist
+bagpipe,artist
+Bordonua,artist
+Bouzouki ,artist
+Bullroarer,artist
+accordian,artist
+Cabrette,artist
+Calliope ,artist
+Carillon,artist
+Castanets,artist
+Cavaco ,artist
+Cavaquinho,artist
+Caxixi ,artist
+Celesta,artist
+Cello ,artist
+Ceng ,artist
+Chabrette,artist
+Chapman ,artist
+Charango ,artist
+Chenda ,artist
+Chi,artist
+Chimes,artist
+Ching ,artist
+Chitaronne,artist
+Chitarra ,artist
+Chromatic,artist
+Cimbalom,artist
+Cimbasso,artist
+Cimpoi ,artist
+Cittern,artist
+Clarinette,artist
+Clavicembelo ,artist
+Clavichord,artist
+Concertina,artist
+conch,artist
+Conga ,artist
+Sarrusophone,artist
+Contrabassoon,artist
+Cornet,artist
+Cowbell,artist
+Cromorne,artist
+Crumhorn,artist
+Crwth ,artist
+Cuatro,artist
+Cuíca ,artist
+Cymbals ,artist
+Cymbalum,artist
+Dabakan,artist
+Dadihu,artist
+Dahu,artist
+Daiko,artist
+Dankiyo,artist
+Daraboukka ,artist
+Darabukka,artist
+Darbuka,artist
+Darvyra,artist
+Dhol,artist
+Dholak,artist
+Didgeridoo,artist
+Dihu,artist
+Diyingehu,artist
+Djembe,artist
+Doedelzak,artist
+Dombak ,artist
+Domra,artist
+Dotara,artist
+cuprophone,artist
+stylophone,artist
+Dudelsack,artist
+Dudy,artist
+Duff,artist
+Dulcian,artist
+Dulcimer ,artist
+Dulzaina,artist
+Dumbelek,artist
+Dutar,artist
+Duxianqin,artist
+Ektara ,artist
+Erhu,artist
+Erxian,artist
+Euphonium ,artist
+Fangxiang ,artist
+Fiddle,artist
+Fiscarmonica ,artist
+Flageolets,artist
+Flugelhorn,artist
+Folgerphone,artist
+Gaida,artist
+Gaita,artist
+Gajdy,artist
+Gambang,artist
+Gandingan ,artist
+Ganza,artist
+Gaohu ,artist
+Gayageum,artist
+Gehu,artist
+Glasschord,artist
+Glockenspiel,artist
+Gong,artist
+Gottuvadhyam,artist
+bagpipe,artist
+warpipes,artist
+Guan,artist
+Gugin,artist
+Guiro,artist
+Guitar,artist
+Guitar,artist
+Guitarrón,artist
+Guqin,artist
+Gusle,artist
+Gusli,artist
+Guzheng,artist
+Hammered dulcimer,artist
+Handbells,artist
+Hang,artist
+fiddle,artist
+Organ,artist
+Harp,artist
+Harpsichord,artist
+Heckelphone,artist
+Hegelong,artist
+Hélicon,artist
+Hichiriki,artist
+Hocchiku,artist
+Horagai,artist
+Horn,artist
+Hosho,artist
+Hsaio,artist
+Huemmelchen,artist
+Huluhu,artist
+Hun,artist
+Horn,artist
+Huqin,artist
+Igil,artist
+Inci,artist
+Ipu,artist
+Uilleann,artist
+Janggu,artist
+Shakuhachi,artist
+harp,artist
+Jiaohu,artist
+Jinghu,artist
+Kadlong,artist
+Kagul,artist
+Kangling,artist
+Kaval,artist
+Timpani,artist
+Bugle,artist
+Trumpet,artist
+Khene,artist
+Khim,artist
+Khloy,artist
+Khol,artist
+Kissar,artist
+Knatele,artist
+Kokyu,artist
+Komungo,artist
+Kora,artist
+Koto,artist
+Koudi,artist
+Koziol,artist
+Kubing,artist
+Kulintang a putao/ kulintang a tiniok,artist
+Kulintang/ kolintang,artist
+Kutiyapi,artist
+Kwa-yen,artist
+Lambeg ,artist
+Langeleik,artist
+Laruan,artist
+Launeddas,artist
+Leier,artist
+Leiqin ,artist
+Lirone,artist
+Lithophone,artist
+Lusheng,artist
+Lute,artist
+Maguhu,artist
+Malimba,artist
+Mando-bass,artist
+Mandocello,artist
+Mandola,artist
+Mandolin,artist
+Mangtong,artist
+Maraca,artist
+Marimba,artist
+Marimbao,artist
+Marinbaphone,artist
+Mbira/ Sanza/ Thumb Piano,artist
+Mellophone,artist
+Mellotron,artist
+Melodeon,artist
+Melodica,artist
+Metallophones,artist
+Mijwiz,artist
+Mittlealtersackpfeife,artist
+Mizwad,artist
+Moodswinger,artist
+Mridangam,artist
+Muchosac,artist
+bow,artist
+Nadaswaram,artist
+Naqara,artist
+Trumpet,artist
+smallpipes,artist
+Nyckelharpa,artist
+Oboe,artist
+Ocarina,artist
+Octaban,artist
+Octapad,artist
+Octavin,artist
+Octocontrabass,artist
+Oliphant,artist
+Ophicleide,artist
+Organ,artist
+Paixiao,artist
+Palendang,artist
+Piano,artist
+Piccolo,artist
+heckelphone,artist
+Pipa,artist
+Piva,artist
+Psaltery,artist
+Pulalu,artist
+Qanun,artist
+Quena,artist
+Quinticlave,artist
+Racket,artist
+Rainstick,artist
+Raita,artist
+Rajao,artist
+Ratchet,artist
+Rebab,artist
+Rebec,artist
+Recorder,artist
+contrabass,artist
+Pipe,artist
+tuba,artist
+Ruan,artist
+Ryuteki,artist
+Sabar,artist
+Sackbutt,artist
+Säckpipa ,artist
+Saenghwang,artist
+Sallaneh,artist
+Sampho,artist
+Sampler,artist
+Sang-auk,artist
+Santur,artist
+Sanxian,artist
+Sarrusophone,artist
+Saung,artist
+Saxhorn,artist
+Saxonette,artist
+Saxophone,artist
+smallpipes,artist
+Serpent,artist
+Serunai,artist
+Setar,artist
+Shamisen,artist
+Shawm,artist
+Shekere,artist
+Sheng,artist
+Shinobue,artist
+Shofar,artist
+Sihu,artist
+Siren,artist
+Sitar,artist
+Slidewhistle,artist
+Snaredrum,artist
+saxophone,artist
+clarinet,artist
+mandolin,artist
+saxophone,artist
+soprillo,artist
+Sorna,artist
+Sousaphone,artist
+Sralai,artist
+drum,artist
+guitar,artist
+Suling,artist
+Suona,artist
+Synclavier,artist
+Synthesizer,artist
+Tabla,artist
+Tagutok,artist
+Taiko,artist
+Tambour,artist
+Tambourine,artist
+Tamburitza,artist
+Tan-tan,artist
+Taphon,artist
+Tar,artist
+Tárogató,artist
+horn,artist
+mandola,artist
+sarrusophone,artist
+Tenoroon,artist
+Teponaztli,artist
+Thavil,artist
+Theorbo,artist
+Theremin,artist
+Timpani/ kettle drum,artist
+Timple,artist
+Tin whistle,artist
+Tjelempung/ Celempung (Javanese zither),artist
+Tom-tom,artist
+Tonette,artist
+Torupill,artist
+Trekspill,artist
+Triangle,artist
+Trombone,artist
+Tromboon,artist
+Trompeta,artist
+Trumpet,artist
+Tsampouna,artist
+Tsuri-daiko,artist
+Tuba,artist
+Tuhu,artist
+Tumpong ,artist
+Turntables,artist
+Udu,artist
+Ukulele,artist
+Valiha ,artist
+viola,artist
+Veuze,artist
+Vibraphone,artist
+Vielle,artist
+Vihuela,artist
+Viola,artist
+Viola d’amore,artist
+Viola da gamba,artist
+Viola organista,artist
+Violin,artist
+Violotta,artist
+Vladimirsky Rozhok,artist
+Volinka,artist
+Tuba,artist
+Washint,artist
+Washtub bass,artist
+Whip ,artist
+Whistle,artist
+WindChimes,artist
+Xiao,artist
+Xiaodihu ,artist
+Xun,artist
+Xylophone,artist
+Xylorimba ,artist
+Yazheng,artist
+Yehu, artist
+Yu,artist
+Zampogna,artist
+Zaqq ,artist
+Zither,artist
+Zonghu,artist
+Zufalo,artist
+Zurna,artist
+musician, artist
+music, artist
+paint, artist
+painter, artist
+illustrator, artist
+animation, artist
+poet, artist
+poetry, artist
+lutenist, artist
+lute, artist
+painter, artist
+sculptor, artist
+ceramicist, artist
+printmaker, artist
+draw,artist
+drawing,artist
+curator,artist
+painting, artist
+paintings, artist
+draughtsman, artist
+pointillism, artist
