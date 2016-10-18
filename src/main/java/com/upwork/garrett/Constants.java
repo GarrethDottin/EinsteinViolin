@@ -7,12 +7,17 @@ import java.util.HashMap;
  */
 public class Constants {
     public static final HashMap<String, Integer> VOCAB_WEIGHTS = new HashMap<String, Integer>() {{
-        put("played music", 5);
+        put("played music", 2);
         put("violin", 1);
         put("instrument", 1);
         put("music", 1);
         put("playing loud", 2);
-        put("played his violin", 5);
+        put("played his violin", 3);
+        put("played the",2);
+        put("played the piano", 3);
+        put("chamber music", 2);
+        put("studied music", 2);
+        put("his poems", 2);
     }};
     public static final String[] STOP_WORDS = {"a", "about",
             "above",
